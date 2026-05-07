@@ -1,3 +1,7 @@
+######################################
+#   CALCULATEUR DE BUDGET MENSUEL    #
+######################################
+
 def saisir_revenu():
     salaire_principal = float(input("Entrez le salaire mensuel: "))
     return salaire_principal
