@@ -2,15 +2,26 @@
 #   CALCULATEUR DE BUDGET MENSUEL    #
 ######################################
 
+
+def saisir_montant(message):
+    while True:
+        try:
+            message_erreur = "La réponse que vous avez saisie est invalide. Veuillez réessayer."
+            liste_depenses = float(input(message))
+            return liste_depenses
+        except ValueError:
+            print(message_erreur)
+
+
 def saisir_revenu():
-    salaire_principal = float(input("Entrez le salaire mensuel: "))
+    salaire_principal = saisir_montant("Entrez le salaire mensuel : ")
     return salaire_principal
 
 def saisir_depenses_mensuelles():
     n_liste_depenses = ["Loyer", "Épicerie", "Transport", "Loisir"]
     total = 0
     for elem in n_liste_depenses:
-        liste_depenses = float(input(f"Entrez le montant associé au {elem}: "))
+        liste_depenses = saisir_montant(f"Entrez le montant associé au {elem} : ")
         total = total + liste_depenses
     return total
 
