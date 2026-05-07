@@ -3,8 +3,12 @@ def saisir_revenu():
     return salaire_principal
 
 def saisir_depenses_mensuelles():
-    liste_depenses = float(input("Entrez le montant des dépenses mensuelles: "))
-    return liste_depenses
+    n_liste_depenses = ["Loyer", "Épicerie", "Transport", "Loisir"]
+    total = 0
+    for elem in n_liste_depenses:
+        liste_depenses = float(input(f"Entrez le montant associé au {elem}: "))
+        total = total + liste_depenses
+    return total
 
 def montant_restant(salaire, depenses):
     revenu_restant = salaire - depenses
