@@ -16,4 +16,11 @@ def main():
     reste = montant_restant(salaire,depenses)
     print(f"À la fin du mois, selon vos données il vous restera ${reste:.2f}.")
 
+    if reste > 0:
+        print("Félicitations, vos finances sont bien gérées!")
+    elif reste == 0:
+        print("Faites attention, vous êtes à risque de faillite.")
+    elif reste < 0:
+        print("DANGER ! Vous dépensez plus d'argent que vous n'en gagnez. Penser à réviser vos dépenses.")
+
 main()
