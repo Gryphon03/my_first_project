@@ -35,9 +35,14 @@ def main():
     salaire = saisir_revenu()
     depenses, categorie = saisir_depenses_mensuelles()
     reste = montant_restant(salaire,depenses)
+    print("=" * 30)
+    print("  RÉSUMÉ DU BUDGET MENSUEL  ")
+    print("=" * 30)
     for nom, montant in categorie.items():
-        print(f"{nom} : {montant:.2f} $")
+        print(f"{nom:<15}: ${montant:.2f}     {(montant/salaire) * 100}%")
+    print("-" * 30)
     print(f"À la fin du mois, selon vos données il vous restera ${reste:.2f}.")
+    print("=" * 30)
 
     if reste > 0:
         print("Félicitations, vos finances sont bien gérées!")
