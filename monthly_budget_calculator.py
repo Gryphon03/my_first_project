@@ -1,3 +1,5 @@
+from datetime import date
+
 ######################################
 #   CALCULATEUR DE BUDGET MENSUEL    #
 ######################################
@@ -31,15 +33,28 @@ def montant_restant(salaire, depenses):
     revenu_restant = salaire - depenses
     return revenu_restant
 
+def sauvegarder_rapport(salaire, categorie, depenses, reste):
+    with open("rapport.txt", "w", encoding="UTF-8") as f:
+        f.write("=" * 30 + "\n")
+        f.write("  RÉSUMÉ DU BUDGET MENSUEL\n")
+        f.write("=" * 30 + "\n")
+        for nom, montant in categorie.items():
+            f.write(f"{nom:<15}: {montant:.2f} $\n")
+        f.write("-" * 30 + "\n")
+        f.write(f"Solde restant  : {reste:.2f} $\n")
+        f.write("=" * 30 + "\n")
+    print(f"Rapport sauvegardé !")
+
 def main():
     salaire = saisir_revenu()
     depenses, categorie = saisir_depenses_mensuelles()
     reste = montant_restant(salaire,depenses)
+    sauvegarder_rapport(salaire, categorie, depenses, reste)
     print("=" * 30)
     print("  RÉSUMÉ DU BUDGET MENSUEL  ")
     print("=" * 30)
     for nom, montant in categorie.items():
-        print(f"{nom:<15}: ${montant:.2f}     {(montant/salaire) * 100}%")
+        print(f"{nom:<15}: ${montant:.2f}     {(montant/salaire) * 100:.1f}%")
     print("-" * 30)
     print(f"À la fin du mois, selon vos données il vous restera ${reste:.2f}.")
     print("=" * 30)
