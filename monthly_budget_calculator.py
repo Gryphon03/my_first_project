@@ -1,10 +1,9 @@
-from datetime import date
+import matplotlib.pyplot as plt
+
 
 ######################################
 #   CALCULATEUR DE BUDGET MENSUEL    #
 ######################################
-
-
 def saisir_montant(message):
     while True:
         try:
@@ -19,6 +18,7 @@ def saisir_revenu():
     salaire_principal = saisir_montant("Entrez le salaire mensuel : ")
     return salaire_principal
 
+
 def saisir_depenses_mensuelles():
     categorie = {}
     n_liste_depenses = ["Loyer", "Épicerie", "Transport", "Loisir"]
@@ -29,9 +29,11 @@ def saisir_depenses_mensuelles():
         categorie[elem] = liste_depenses
     return total, categorie
 
+
 def montant_restant(salaire, depenses):
     revenu_restant = salaire - depenses
     return revenu_restant
+
 
 def sauvegarder_rapport(salaire, categorie, depenses, reste):
     with open("rapport.txt", "w", encoding="UTF-8") as f:
@@ -45,11 +47,21 @@ def sauvegarder_rapport(salaire, categorie, depenses, reste):
         f.write("=" * 30 + "\n")
     print(f"Rapport sauvegardé !")
 
+
+def afficher_graphique(categorie):
+    noms = list(categorie.keys())
+    valeurs = list(categorie.values())
+    plt.pie(valeurs, labels=noms, autopct="%1.1f%%")
+    plt.title("Répartition des dépenses mensuelles")
+    plt.show()
+
+
 def main():
     salaire = saisir_revenu()
     depenses, categorie = saisir_depenses_mensuelles()
     reste = montant_restant(salaire,depenses)
     sauvegarder_rapport(salaire, categorie, depenses, reste)
+    afficher_graphique(categorie)
     print("=" * 30)
     print("  RÉSUMÉ DU BUDGET MENSUEL  ")
     print("=" * 30)
@@ -58,12 +70,12 @@ def main():
     print("-" * 30)
     print(f"À la fin du mois, selon vos données il vous restera ${reste:.2f}.")
     print("=" * 30)
-
     if reste > 0:
         print("Félicitations, vos finances sont bien gérées!")
     elif reste == 0:
         print("Faites attention, vous êtes à risque de faillite.")
     elif reste < 0:
         print("DANGER ! Vous dépensez plus d'argent que vous n'en gagnez. Penser à réviser vos dépenses.")
+
 
 main()
